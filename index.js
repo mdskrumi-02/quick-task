@@ -7,10 +7,10 @@ ctx.canvas.parentNode.style.width = "400px";
 ctx.canvas.parentNode.style.height = "400px";
 
 const legendColors = [
-  "rgb(180, 104, 199)",
-  "rgb(0, 134, 201)",
-  "rgb(247, 144, 9)",
-  "rgb(155, 69, 46)",
+  "rgb(165, 185, 156)",
+  "rgb(64, 89, 82)",
+  "rgb(255, 212, 148)",
+  "rgb(166, 150, 105)",
 ];
 
 const config = {

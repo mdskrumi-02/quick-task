@@ -1,7 +1,7 @@
 .main_container {
   padding: auto;
   margin: auto;
-  font-family: "Inter", sans-serif;
+  font-family: "Barlow", sans-serif;
   max-width: 1440px;
   color: #475467;
 }
@@ -34,7 +34,7 @@
 .calculator_form {
   width: 40%;
   display: block;
-  background-color: #175945;
+  background-color: #6b8d73;
   padding: 1.5rem;
   padding-top: 3.5rem;
 }
