@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Räkna ut lön baserat på fakturering</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <main class="main_container">
+      <h1 class="page_header">Räkna ut lön baserat på fakturering</h1>
+
+      <div class="calculator_root">
+        <div class="calculator_form">
+          <label>Du fakturerar för</label>
+          <div class="invoice_input">
+            <input
+              id="invoice"
+              type="number"
+              placeholder="enter your invoice"
+              value="10000"
+            />
+            <div class="currency_section">SEK</div>
+          </div>
+          <br />
+          <label>Din ålder</label>
+          <div class="age_input">
+            <select>
+              <option value="1">Below 24 Years</option>
+              <option value="2" selected>25 - 66 Years</option>
+              <option value="3">66 - 89 Year</option>
+              <option value="4">Above 90 Years</option>
+            </select>
+          </div>
+
+          <div class="info_box">
+            <ul id="result"></ul>
+          </div>
+        </div>
+        <div class="display_section">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </main>
+    <script src="./index.js" defer></script>
+  </body>
+</html>

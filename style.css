@@ -1,0 +1,121 @@
+.main_container{
+    padding: auto;
+    margin: auto;   
+}
+
+.page_header {
+    text-align: center;
+}
+
+
+.main_container label {
+    color: #FFFFFF;
+}
+
+.calculator_root{
+    display: flex;
+    max-width: 1024px;
+    max-height: 800px;
+    width: 100%;
+    margin: auto auto;
+    border: 1px solid #FFFFFF;
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.calculator_form{
+    width: 40%;
+    display: block;
+    background-color: #053321;
+    padding: 1.5rem;
+}
+
+
+
+.invoice_input {
+    display: flex;
+    padding: 0rem 0rem;
+    width: 100%;
+    align-items: center;
+    padding-top: 0.25rem;
+}
+
+.invoice_input input {
+    padding: 0.75rem;
+    width: 100%;
+    outline-style: none;
+    border-left: #Fbfbfb;
+    border-top: #Fbfbfb;
+    border-bottom: #Fbfbfb;
+}
+.invoice_input .currency_section {
+    background-color: #ECF0F1;
+    padding: 0.65rem;
+    margin-left: -5px;
+    border-right: #Fbfbfb;
+    border-top: #Fbfbfb;
+    border-bottom: #Fbfbfb;
+}
+
+
+.age_input {
+    padding-top: 0.25rem;
+}
+
+.age_input select {
+    width: 100%;
+    padding: 0.75rem;
+}
+
+
+
+.info_box {
+    border: 1px solid #Fbfbfb;
+    border-radius: 0.375rem;
+    background-color: #F1ECFD;
+    margin-top: 4.5rem;
+    padding: 1rem;
+
+}
+
+.info_box ul {
+    margin: 0;
+    padding: 0;
+}
+
+.info_box ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info_box ul li p {
+    margin: 0;
+    padding: 0.25rem;
+}
+
+
+.display_section{
+    width: 60%;
+    background-color: #F1ECFD;
+    max-height: 100%;
+    margin: auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+
+.display_section canvas{
+    height:400px !important;
+   
+}
+
+
+
+
+
+
+
+
+
+
+
