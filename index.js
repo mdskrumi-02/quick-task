@@ -74,6 +74,7 @@ function drawChart(calculatedData) {
         ],
         backgroundColor: legendColors,
         hoverOffset: 4,
+        spacing: 4,
       },
     ],
   };

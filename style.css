@@ -171,6 +171,7 @@
   .calculator_root {
     flex-direction: column;
     border: none;
+    width: unset;
   }
   .calculator_form {
     width: 90%;
@@ -181,6 +182,11 @@
 
   .display_section {
     flex-direction: column;
+  }
+
+  .legend_row {
+    max-width: 90vw;
+    min-width: unset;
   }
 }
 
