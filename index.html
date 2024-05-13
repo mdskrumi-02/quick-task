@@ -6,6 +6,13 @@
     <title>Räkna ut lön baserat på fakturering</title>
     <link rel="stylesheet" href="./style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <main class="main_container">
@@ -38,8 +45,23 @@
             <ul id="result"></ul>
           </div>
         </div>
-        <div class="display_section">
-          <canvas id="myChart"></canvas>
+        <div class="chart_side">
+          <div class="display_section">
+            <div class="chart_div">
+              <canvas id="myChart" width="240" height="240"></canvas>
+            </div>
+            <div class="legend_section">
+              <div class="legend_row">
+                <div class="legend_color"></div>
+                <div class="legend_left">Din nettolön</div>
+                <div class="legend_right">4 803 SEK</div>
+              </div>
+            </div>
+          </div>
+          <p class="bottom_text">
+            *Kalkylatorn ger ett estimat och inkluderar ej eventuella avvikande
+            faktorer
+          </p>
         </div>
       </div>
     </main>

@@ -1,58 +1,34 @@
 const invoiceInput = document.getElementById("invoice");
 const selectElement = document.querySelector(".age_input select");
 const resultDiv = document.getElementById("result");
-const ctx = document.getElementById("myChart");
+const legendContainer = document.querySelector(".legend_section");
+const ctx = document.getElementById("myChart").getContext("2d");
+ctx.canvas.parentNode.style.width = "400px";
+ctx.canvas.parentNode.style.height = "400px";
 
-let chart;
-const data = {
-  labels: ["Net Salary", "Taxes & Fees", "Cool Company Fee", "Service Pension"],
-  datasets: [
-    {
-      label: "Dataset",
-      data: ["4803.70", "4289.60", "598.00", "308.70"],
-      backgroundColor: [
-        "rgb(255, 99, 132)",
-        "rgb(54, 162, 235)",
-        "rgb(255, 205, 86)",
-        "rgb(75, 192, 192)",
-      ],
-      hoverOffset: 4,
-    },
-  ],
-};
-const options = {
-  plugins: {
-    legend: {
-      position: "right",
-      labels: {
-        generateLabels: function (chart) {
-          const labels = [];
-          const data = chart.data.datasets[0].data;
+const legendColors = [
+  "rgb(180, 104, 199)",
+  "rgb(0, 134, 201)",
+  "rgb(247, 144, 9)",
+  "rgb(155, 69, 46)",
+];
 
-          data.forEach(function (value, index) {
-            labels.push({
-              text: `${chart.data.labels[index]}: ${value}`,
-              fillStyle: chart.data.datasets[0].backgroundColor[index],
-            });
-          });
-
-          return labels;
-        },
-        boxWidth: 10,
-        boxHeight: 10,
-        usePointStyle: true,
-        padding: 10,
+const config = {
+  type: "doughnut",
+  data: {},
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    // cutout: 120,
+    plugins: {
+      legend: {
+        display: false,
       },
     },
   },
 };
-const config = {
-  type: "doughnut",
-  data: data,
-  options,
-};
 
-chart = new Chart(ctx, config);
+let chart = new Chart(ctx, config);
 
 let invoiceAmount = invoiceInput.value;
 let age = selectElement.value;
@@ -66,68 +42,14 @@ function debounce(func, delay) {
 }
 
 function handleInvoiceChange() {
+  invoiceAmount = invoiceInput.value;
   if (!invoice || !age) {
     return;
   }
-  invoiceAmount = invoiceInput.value;
-  const calculation = calculateSalaryDetails();
-
-  const newData = {
-    labels: [
-      "Net Salary",
-      "Taxes & Fees",
-      "Cool Company Fee",
-      "Service Pension",
-    ],
-    datasets: [
-      {
-        label: "Dataset",
-        data: [
-          calculation.netSalary,
-          calculation.taxesAndFees,
-          calculation.coolCompanyFee,
-          calculation.servicePension ? calculation.servicePension : 0,
-        ],
-        backgroundColor: [
-          "rgb(255, 99, 132)",
-          "rgb(54, 162, 235)",
-          "rgb(255, 205, 86)",
-          "rgb(75, 192, 192)",
-        ],
-        hoverOffset: 4,
-      },
-    ],
-  };
-
-  const text =
-    age === "2"
-      ? `<li>
-            <p>Salary on your account:</p>
-            <p>${calculation.netSalary}</p></li>
-         <li>
-            <p>Service Pension:</p>
-            <p>${
-              calculation.servicePension ? calculation.servicePension : 0
-            }</p>
-         </li>
-         <li>
-            <p>Total compensation:</p>
-            <p>${
-              calculation.servicePension
-                ? +calculation.servicePension + +calculation.netSalary
-                : 0
-            }</p>
-          </li>
-  `
-      : `<li>
-            <p>Salary on your account:</p>
-            <p>${calculation.netSalary}</p>
-          </li>`;
-
-  resultDiv.innerHTML = text;
-  chart.data = newData;
-
-  chart.update();
+  const { data, legend } = calculateSalaryDetails();
+  drawChart(data);
+  drawLegends(legend);
+  showSummery(data);
 }
 
 function handleAgeChange(event) {
@@ -135,54 +57,161 @@ function handleAgeChange(event) {
   handleInvoiceChange();
 }
 
+function drawChart(calculatedData) {
+  const newData = {
+    labels: [
+      "Din nettolön",
+      "Tjänstepension",
+      "Skatter & avgifter",
+      "Cool Companys avgift 5,98%",
+    ],
+    datasets: [
+      {
+        label: "Dataset",
+        data: [
+          calculatedData.netSalary.toFixed(0),
+          calculatedData.servicePension
+            ? calculatedData.servicePension.toFixed(0)
+            : 0,
+          calculatedData.taxesAndFees.toFixed(0),
+          calculatedData.coolCompanyFee.toFixed(0),
+        ],
+        backgroundColor: legendColors,
+        hoverOffset: 4,
+      },
+    ],
+  };
+  chart.data = newData;
+  chart.update();
+}
+
+function drawLegends(legend) {
+  legendContainer.innerHTML = "";
+
+  legend.forEach((item) => {
+    if (item.value === "0.00") {
+      return;
+    }
+
+    const legendItem = document.createElement("div");
+    legendItem.classList.add("legend_row");
+
+    const legendColor = document.createElement("div");
+    legendColor.classList.add("legend_color");
+    legendColor.style.backgroundColor = item.color;
+
+    const legendLeft = document.createElement("div");
+    legendLeft.classList.add("legend_left");
+    legendLeft.textContent = item.label;
+
+    const legendRight = document.createElement("div");
+    legendRight.classList.add("legend_right");
+    legendRight.textContent = item.value + " SEK";
+
+    legendItem.appendChild(legendColor);
+    legendItem.appendChild(legendLeft);
+    legendItem.appendChild(legendRight);
+
+    legendContainer.appendChild(legendItem);
+  });
+}
+
+function showSummery(calculatedData) {
+  const text =
+    age === "2"
+      ? `<li>
+            <p>Lön på ditt konto</p>
+            <p>${calculatedData.netSalary.toFixed(0)} SEK</p></li>
+         <li>
+            <p>Tjänstepension</p>
+            <p>${
+              calculatedData.servicePension
+                ? calculatedData.servicePension.toFixed(0)
+                : 0
+            } SEK</p>
+         </li>
+         <li style="font-weight: bold;">
+            <p>Total ersättning</p>
+            <p>${
+              calculatedData.servicePension
+                ? (
+                    +calculatedData.servicePension + +calculatedData.netSalary
+                  ).toFixed(0)
+                : 0
+            } SEK</p>
+          </li>
+  `
+      : `<li style="font-weight: bold;">
+            <p>Lön på ditt konto</p>
+            <p>${calculatedData.netSalary.toFixed(0)} SEK</p>
+          </li>`;
+
+  resultDiv.innerHTML = text;
+}
+
 function calculateSalaryDetails() {
-  console.log(invoiceAmount, age);
+  let result = {};
 
   if (!invoice || !age) {
     return null;
   } else if (age === "1") {
-    const taxesAndFees = invoiceAmount * 0.4394;
-    const coolCompanyFee = invoiceAmount * 0.0598;
-    const netSalary = invoiceAmount - taxesAndFees - coolCompanyFee;
-    return {
-      netSalary: netSalary.toFixed(2),
-      taxesAndFees: taxesAndFees.toFixed(2),
-      coolCompanyFee: coolCompanyFee.toFixed(2),
+    // Calculation for age less than 25
+    result = {
+      netSalary: invoiceAmount * (1 - 0.4394 - 0.0598),
+      taxesAndFees: invoiceAmount * 0.4394,
+      coolCompanyFee: invoiceAmount * 0.0598,
+      servicePension: 0,
     };
   } else if (age === "2") {
-    const servicePension = invoiceAmount * 0.03087;
-    const taxesAndFees = invoiceAmount * 0.42896;
-    const coolCompanyFee = invoiceAmount * 0.0598;
-    const netSalary =
-      invoiceAmount - servicePension - taxesAndFees - coolCompanyFee;
-
-    return {
-      netSalary: netSalary.toFixed(2),
-      servicePension: servicePension.toFixed(2),
-      taxesAndFees: taxesAndFees.toFixed(2),
-      coolCompanyFee: coolCompanyFee.toFixed(2),
+    // Calculation for age between 25 and 66
+    result = {
+      netSalary: invoiceAmount * (1 - 0.03087 - 0.42896 - 0.0598),
+      servicePension: invoiceAmount * 0.03087,
+      taxesAndFees: invoiceAmount * 0.42896,
+      coolCompanyFee: invoiceAmount * 0.0598,
     };
   } else if (age === "3") {
-    const taxesAndFees = invoiceAmount * 0.34303;
-    const coolCompanyFee = invoiceAmount * 0.0598;
-    const netSalary = invoiceAmount - taxesAndFees - coolCompanyFee;
-
-    return {
-      netSalary: netSalary.toFixed(2),
-      taxesAndFees: taxesAndFees.toFixed(2),
-      coolCompanyFee: coolCompanyFee.toFixed(2),
+    // Calculation for age between 66 and 89
+    result = {
+      netSalary: invoiceAmount * (1 - 0.34303 - 0.0598),
+      taxesAndFees: invoiceAmount * 0.34303,
+      coolCompanyFee: invoiceAmount * 0.0598,
+      servicePension: 0,
     };
   } else if (age === "4") {
-    const taxesAndFees = invoiceAmount * 0.28206;
-    const coolCompanyFee = invoiceAmount * 0.0598;
-    const netSalary = invoiceAmount - taxesAndFees - coolCompanyFee;
-
-    return {
-      netSalary: netSalary.toFixed(2),
-      taxesAndFees: taxesAndFees.toFixed(2),
-      coolCompanyFee: coolCompanyFee.toFixed(2),
+    // Calculation for age above 90
+    result = {
+      netSalary: invoiceAmount * (1 - 0.28206 - 0.0598),
+      taxesAndFees: invoiceAmount * 0.28206,
+      coolCompanyFee: invoiceAmount * 0.0598,
+      servicePension: 0,
     };
   }
+
+  const legendData = [
+    {
+      label: "Din nettolön",
+      value: result.netSalary.toFixed(0),
+      color: legendColors[0],
+    },
+    {
+      label: "Tjänstepension",
+      value: result.servicePension.toFixed(0),
+      color: legendColors[1],
+    },
+    {
+      label: "Skatter & avgifter",
+      value: result.taxesAndFees.toFixed(0),
+      color: legendColors[2],
+    },
+    {
+      label: "Cool Companys avgift 5,98%",
+      value: result.coolCompanyFee.toFixed(0),
+      color: legendColors[3],
+    },
+  ];
+
+  return { data: result, legend: legendData };
 }
 
 invoiceInput.oninput = debounce(handleInvoiceChange, 300);
