@@ -119,7 +119,19 @@ function showSummery(calculatedData) {
             <p>Lön på ditt konto</p>
             <p>${calculatedData.netSalary.toFixed(0)} SEK</p></li>
          <li>
-            <p>Tjänstepension</p>
+            <p>Tjänstepension 
+            
+            <span class="tooltip">
+            <img src="./assets/Icon-gray.png" alt="info" />
+            <span class="tooltiptext"
+              >Cool Company är sedan 1 januari 2023 anslutna till
+              kollektivavtal och avsätter därmed automatiskt 4,5 procent av
+              ditt intjänade arvode till tjänstepension åt dig.</span
+            >
+          </span>
+
+
+            </p>
             <p>${
               calculatedData.servicePension
                 ? calculatedData.servicePension.toFixed(0)
