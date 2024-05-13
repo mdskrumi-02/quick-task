@@ -1,5 +1,5 @@
 const invoiceInput = document.getElementById("invoice");
-const selectElement = document.querySelector(".age_input select");
+const selectElement = document.querySelector(".custom-select");
 const resultDiv = document.getElementById("result");
 const legendContainer = document.querySelector(".legend_section");
 const ctx = document.getElementById("myChart").getContext("2d");
@@ -19,7 +19,7 @@ const config = {
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    // cutout: 120,
+    cutout: 90,
     plugins: {
       legend: {
         display: false,
@@ -31,7 +31,7 @@ const config = {
 let chart = new Chart(ctx, config);
 
 let invoiceAmount = invoiceInput.value;
-let age = selectElement.value;
+let age = "2";
 
 function debounce(func, delay) {
   let timer;
@@ -43,18 +43,15 @@ function debounce(func, delay) {
 
 function handleInvoiceChange() {
   invoiceAmount = invoiceInput.value;
-  if (!invoice || !age) {
+
+  if (!invoiceAmount || !age) {
     return;
   }
   const { data, legend } = calculateSalaryDetails();
+
   drawChart(data);
   drawLegends(legend);
   showSummery(data);
-}
-
-function handleAgeChange(event) {
-  age = event.target.value;
-  handleInvoiceChange();
 }
 
 function drawChart(calculatedData) {
@@ -67,7 +64,6 @@ function drawChart(calculatedData) {
     ],
     datasets: [
       {
-        label: "Dataset",
         data: [
           calculatedData.netSalary.toFixed(0),
           calculatedData.servicePension
@@ -89,7 +85,7 @@ function drawLegends(legend) {
   legendContainer.innerHTML = "";
 
   legend.forEach((item) => {
-    if (item.value === "0.00") {
+    if (+item.value === 0) {
       return;
     }
 
@@ -130,7 +126,7 @@ function showSummery(calculatedData) {
                 : 0
             } SEK</p>
          </li>
-         <li style="font-weight: bold;">
+         <li style="font-weight: bold; color: #175945;">
             <p>Total ersättning</p>
             <p>${
               calculatedData.servicePension
@@ -141,7 +137,7 @@ function showSummery(calculatedData) {
             } SEK</p>
           </li>
   `
-      : `<li style="font-weight: bold;">
+      : `<li style="font-weight: bold; color: #175945;">
             <p>Lön på ditt konto</p>
             <p>${calculatedData.netSalary.toFixed(0)} SEK</p>
           </li>`;
@@ -215,5 +211,19 @@ function calculateSalaryDetails() {
 }
 
 invoiceInput.oninput = debounce(handleInvoiceChange, 300);
-selectElement.onchange = handleAgeChange;
 handleInvoiceChange();
+
+selectElement.addEventListener("click", function () {
+  y = document.getElementsByClassName("select-selected");
+
+  if (y[0].innerText === "< 24 år") {
+    age = "1";
+  } else if (y[0].innerText === "25 – 66 år") {
+    age = "2";
+  } else if (y[0].innerText === "67 – 89 år") {
+    age = "3";
+  } else if (y[0].innerText === "> 90 år") {
+    age = "4";
+  }
+  handleInvoiceChange();
+});
