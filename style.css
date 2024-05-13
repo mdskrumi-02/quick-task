@@ -201,7 +201,7 @@
 .select-selected:after {
   position: absolute;
   content: "";
-  top: 14px;
+  top: 18px;
   right: 10px;
   width: 0;
   height: 0;
@@ -211,7 +211,7 @@
 
 .select-selected.select-arrow-active:after {
   border-color: transparent transparent #175945 transparent;
-  top: 7px;
+  top: 12px;
 }
 
 .select-items div,
