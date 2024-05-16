@@ -6,7 +6,7 @@ const ctx = document.getElementById("myChart").getContext("2d");
 ctx.canvas.parentNode.style.width = "400px";
 ctx.canvas.parentNode.style.height = "400px";
 
-const legendColors = ["#A5B99C", "#405952", "#C8C9C5", "#175945"];
+const legendColors = ["#A5B99C", "#405952", "#C8C9C5", "#F2E5D6"];
 
 const config = {
   type: "doughnut",
@@ -117,7 +117,7 @@ function showSummery(calculatedData) {
          <li>
             <p>Tjänstepension 
             
-            <span class="tooltip">
+            <span class="tooltip inline-tooltip">
             <img src="./assets/Icon-gray.png" alt="info" />
             <span class="tooltiptext"
               >Cool Company är sedan 1 januari 2023 anslutna till
@@ -161,33 +161,33 @@ function calculateSalaryDetails() {
   } else if (age === "1") {
     // Calculation for age less than 25
     result = {
-      netSalary: invoiceAmount * (1 - 0.4394 - 0.0598),
+      netSalary: invoiceAmount * (1 - 0.4394 - 0.06),
       taxesAndFees: invoiceAmount * 0.4394,
-      coolCompanyFee: invoiceAmount * 0.0598,
+      coolCompanyFee: invoiceAmount * 0.06,
       servicePension: 0,
     };
   } else if (age === "2") {
     // Calculation for age between 25 and 66
     result = {
-      netSalary: invoiceAmount * (1 - 0.03087 - 0.42896 - 0.0598),
+      netSalary: invoiceAmount * (1 - 0.03087 - 0.42896 - 0.06),
       servicePension: invoiceAmount * 0.03087,
       taxesAndFees: invoiceAmount * 0.42896,
-      coolCompanyFee: invoiceAmount * 0.0598,
+      coolCompanyFee: invoiceAmount * 0.06,
     };
   } else if (age === "3") {
     // Calculation for age between 66 and 89
     result = {
-      netSalary: invoiceAmount * (1 - 0.34303 - 0.0598),
+      netSalary: invoiceAmount * (1 - 0.34303 - 0.06),
       taxesAndFees: invoiceAmount * 0.34303,
-      coolCompanyFee: invoiceAmount * 0.0598,
+      coolCompanyFee: invoiceAmount * 0.06,
       servicePension: 0,
     };
   } else if (age === "4") {
     // Calculation for age above 90
     result = {
-      netSalary: invoiceAmount * (1 - 0.28206 - 0.0598),
+      netSalary: invoiceAmount * (1 - 0.28206 - 0.06),
       taxesAndFees: invoiceAmount * 0.28206,
-      coolCompanyFee: invoiceAmount * 0.0598,
+      coolCompanyFee: invoiceAmount * 0.06,
       servicePension: 0,
     };
   }
