@@ -34,7 +34,7 @@
 .calculator_form {
   width: 40%;
   display: block;
-  background-color: #6b8d73;
+  background-color: #175945;
   padding: 1.5rem;
   padding-top: 3.5rem;
 }
@@ -69,7 +69,7 @@
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   font-size: 14px;
-  color: #00000070;
+  color: #405952;
 }
 
 .age_input {
@@ -97,7 +97,7 @@
 .info_box {
   border: 1px solid #fbfbfb;
   border-radius: 0.375rem;
-  background-color: #eef9f5;
+  background-color: #f2e5d6;
   margin-top: 4.5rem;
   padding: 1rem;
 }
@@ -116,6 +116,11 @@
 .info_box ul li p {
   margin: 0;
   padding: 0.25rem;
+  line-height: 1.5rem;
+}
+
+.info_box ul li span {
+  font-weight: 500;
 }
 
 .display_section {
@@ -165,6 +170,7 @@
 .chart_side .bottom_text {
   text-align: center;
   padding-top: 2rem;
+  color: #175945;
 }
 
 @media screen and (max-width: 1023px) {
@@ -228,12 +234,17 @@
 }
 
 .select-items {
+  margin-top: 0.25rem;
   position: absolute;
   background-color: #ffffff;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 99;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  font-weight: 500;
+  color: #101828;
 }
 
 .select-hide {
@@ -242,7 +253,7 @@
 
 .select-items div:hover,
 .same-as-selected {
-  background-color: #f9fafb;
+  background-color: #a5b99c;
 }
 
 .tooltip {
@@ -253,9 +264,9 @@
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 320px;
-  background-color: black;
+  background-color: #0c111d;
   color: #fff;
-  text-align: justify;
+  text-align: left;
   border-radius: 6px;
   padding: 0.75rem;
   position: absolute;
@@ -264,6 +275,7 @@
   left: 50%;
   margin-left: -60px;
   font-size: 12px;
+  line-height: 1.25rem;
 }
 
 .tooltip .tooltiptext::after {

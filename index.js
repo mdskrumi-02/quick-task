@@ -6,12 +6,7 @@ const ctx = document.getElementById("myChart").getContext("2d");
 ctx.canvas.parentNode.style.width = "400px";
 ctx.canvas.parentNode.style.height = "400px";
 
-const legendColors = [
-  "rgb(165, 185, 156)",
-  "rgb(64, 89, 82)",
-  "rgb(255, 212, 148)",
-  "rgb(166, 150, 105)",
-];
+const legendColors = ["#A5B99C", "#405952", "#C8C9C5", "#175945"];
 
 const config = {
   type: "doughnut",
@@ -60,7 +55,7 @@ function drawChart(calculatedData) {
       "Din nettolön",
       "Tjänstepension",
       "Skatter & avgifter",
-      "Cool Companys avgift 5,98%",
+      "Bolagsbolaget avgift 6%",
     ],
     datasets: [
       {
@@ -118,7 +113,7 @@ function showSummery(calculatedData) {
     age === "2"
       ? `<li>
             <p>Lön på ditt konto</p>
-            <p>${calculatedData.netSalary.toFixed(0)} SEK</p></li>
+            <p><span>${calculatedData.netSalary.toFixed(0)} SEK </span></p></li>
          <li>
             <p>Tjänstepension 
             
@@ -133,26 +128,26 @@ function showSummery(calculatedData) {
 
 
             </p>
-            <p>${
+            <p><span>${
               calculatedData.servicePension
                 ? calculatedData.servicePension.toFixed(0)
                 : 0
-            } SEK</p>
+            } SEK </span></p>
          </li>
-         <li style="font-weight: bold; color: #175945;">
-            <p>Total ersättning</p>
-            <p>${
+         <li style="color: #175945;">
+            <p style="font-weight: bold; color: #175945;">Total ersättning</p>
+            <p><span>${
               calculatedData.servicePension
                 ? (
                     +calculatedData.servicePension + +calculatedData.netSalary
                   ).toFixed(0)
                 : 0
-            } SEK</p>
+            } SEK </span></p>
           </li>
   `
-      : `<li style="font-weight: bold; color: #175945;">
-            <p>Lön på ditt konto</p>
-            <p>${calculatedData.netSalary.toFixed(0)} SEK</p>
+      : `<li style="color: #175945;">
+            <p style="font-weight: bold;">Lön på ditt konto</p>
+            <p><span>${calculatedData.netSalary.toFixed(0)} SEK</span></p>
           </li>`;
 
   resultDiv.innerHTML = text;
@@ -214,7 +209,7 @@ function calculateSalaryDetails() {
       color: legendColors[2],
     },
     {
-      label: "Cool Companys avgift 5,98%",
+      label: "Bolagsbolaget avgift 6%",
       value: result.coolCompanyFee.toFixed(0),
       color: legendColors[3],
     },
