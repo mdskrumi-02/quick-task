@@ -8,6 +8,7 @@
 
 .page_header {
   text-align: center;
+  font-weight: 600;
 }
 
 .main_container label {
@@ -182,6 +183,7 @@
     flex-direction: column;
     border: none;
     width: unset;
+    padding-right: unset;
   }
   .calculator_form {
     width: 90%;
@@ -194,8 +196,18 @@
     flex-direction: column;
   }
 
+  .legend_section {
+    width: 90%;
+  }
+
   .legend_row {
     max-width: 90vw;
+    min-width: unset;
+    width: 100%;
+    padding-right: unset;
+  }
+
+  .info_box ul li {
     min-width: unset;
   }
 }
@@ -257,46 +269,4 @@
 .select-items div:hover,
 .same-as-selected {
   background-color: #a5b99c;
-}
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 320px;
-  background-color: #0c111d;
-  color: #fff;
-  text-align: left;
-  border-radius: 6px;
-  padding: 0.75rem;
-  position: absolute;
-  z-index: 1;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -60px;
-  font-size: 12px;
-  line-height: 1.25rem;
-}
-
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent transparent;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-
-.inline-tooltip {
-  display: flex;
-  align-items: center;
 }
