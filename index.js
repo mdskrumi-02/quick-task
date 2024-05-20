@@ -60,12 +60,10 @@ function drawChart(calculatedData) {
     datasets: [
       {
         data: [
-          calculatedData.netSalary.toFixed(0),
-          calculatedData.servicePension
-            ? calculatedData.servicePension.toFixed(0)
-            : 0,
-          calculatedData.taxesAndFees.toFixed(0),
-          calculatedData.coolCompanyFee.toFixed(0),
+          calculatedData.netSalary,
+          calculatedData.servicePension ? calculatedData.servicePension : 0,
+          calculatedData.taxesAndFees,
+          calculatedData.coolCompanyFee,
         ],
         backgroundColor: legendColors,
         hoverOffset: 4,
@@ -113,12 +111,12 @@ function showSummery(calculatedData) {
     age === "2"
       ? `<li>
             <p>Lön på ditt konto</p>
-            <p><span>${calculatedData.netSalary.toFixed(0)} SEK </span></p></li>
+            <p><span>${calculatedData.netSalary.toLocaleString()} SEK </span></p></li>
          <li>
             <p>Tjänstepension</p>
             <p><span>${
               calculatedData.servicePension
-                ? calculatedData.servicePension.toFixed(0)
+                ? calculatedData.servicePension.toLocaleString()
                 : 0
             } SEK </span></p>
          </li>
@@ -128,14 +126,14 @@ function showSummery(calculatedData) {
               calculatedData.servicePension
                 ? (
                     +calculatedData.servicePension + +calculatedData.netSalary
-                  ).toFixed(0)
+                  ).toLocaleString()
                 : 0
             } SEK </span></p>
           </li>
   `
       : `<li style="color: #175945;">
             <p style="font-weight: bold;">Lön på ditt konto</p>
-            <p><span>${calculatedData.netSalary.toFixed(0)} SEK</span></p>
+            <p><span>${calculatedData.netSalary.toLocaleString()} SEK</span></p>
           </li>`;
 
   resultDiv.innerHTML = text;
@@ -149,33 +147,33 @@ function calculateSalaryDetails() {
   } else if (age === "1") {
     // Calculation for age less than 25
     result = {
-      netSalary: invoiceAmount * (1 - 0.4394 - 0.06),
-      taxesAndFees: invoiceAmount * 0.4394,
-      coolCompanyFee: invoiceAmount * 0.06,
+      netSalary: parseInt(invoiceAmount * (1 - 0.4394 - 0.06)),
+      taxesAndFees: parseInt(invoiceAmount * 0.4394),
+      coolCompanyFee: parseInt(invoiceAmount * 0.06),
       servicePension: 0,
     };
   } else if (age === "2") {
     // Calculation for age between 25 and 66
     result = {
-      netSalary: invoiceAmount * (1 - 0.03087 - 0.42896 - 0.06),
-      servicePension: invoiceAmount * 0.03087,
-      taxesAndFees: invoiceAmount * 0.42896,
-      coolCompanyFee: invoiceAmount * 0.06,
+      netSalary: parseInt(invoiceAmount * (1 - 0.03087 - 0.42896 - 0.06)),
+      servicePension: parseInt(invoiceAmount * 0.03087),
+      taxesAndFees: parseInt(invoiceAmount * 0.42896),
+      coolCompanyFee: parseInt(invoiceAmount * 0.06),
     };
   } else if (age === "3") {
     // Calculation for age between 66 and 89
     result = {
-      netSalary: invoiceAmount * (1 - 0.34303 - 0.06),
-      taxesAndFees: invoiceAmount * 0.34303,
-      coolCompanyFee: invoiceAmount * 0.06,
+      netSalary: parseInt(invoiceAmount * (1 - 0.34303 - 0.06)),
+      taxesAndFees: parseInt(invoiceAmount * 0.34303),
+      coolCompanyFee: parseInt(invoiceAmount * 0.06),
       servicePension: 0,
     };
   } else if (age === "4") {
     // Calculation for age above 90
     result = {
-      netSalary: invoiceAmount * (1 - 0.28206 - 0.06),
-      taxesAndFees: invoiceAmount * 0.28206,
-      coolCompanyFee: invoiceAmount * 0.06,
+      netSalary: parseInt(invoiceAmount * (1 - 0.28206 - 0.06)),
+      taxesAndFees: parseInt(invoiceAmount * 0.28206),
+      coolCompanyFee: parseInt(invoiceAmount * 0.06),
       servicePension: 0,
     };
   }
@@ -183,22 +181,22 @@ function calculateSalaryDetails() {
   const legendData = [
     {
       label: "Din nettolön",
-      value: result.netSalary.toFixed(0),
+      value: parseInt(result.netSalary).toLocaleString(),
       color: legendColors[0],
     },
     {
       label: "Tjänstepension",
-      value: result.servicePension.toFixed(0),
+      value: parseInt(result.servicePension).toLocaleString(),
       color: legendColors[1],
     },
     {
       label: "Skatter & avgifter",
-      value: result.taxesAndFees.toFixed(0),
+      value: parseInt(result.taxesAndFees).toLocaleString(),
       color: legendColors[2],
     },
     {
       label: "Bolagsbolaget avgift 6%",
-      value: result.coolCompanyFee.toFixed(0),
+      value: parseInt(result.coolCompanyFee).toLocaleString(),
       color: legendColors[3],
     },
   ];
