@@ -111,29 +111,25 @@ function showSummery(calculatedData) {
     age === "2"
       ? `<li>
             <p>Lön på ditt konto</p>
-            <p><span>${calculatedData.netSalary.toLocaleString()} SEK </span></p></li>
+            <p><span>${calculatedData.netSalary} SEK </span></p></li>
          <li>
             <p>Tjänstepension</p>
             <p><span>${
-              calculatedData.servicePension
-                ? calculatedData.servicePension.toLocaleString()
-                : 0
+              calculatedData.servicePension ? calculatedData.servicePension : 0
             } SEK </span></p>
          </li>
          <li style="color: #175945;">
             <p style="font-weight: bold; color: #175945;">Total ersättning</p>
             <p><span>${
               calculatedData.servicePension
-                ? (
-                    +calculatedData.servicePension + +calculatedData.netSalary
-                  ).toLocaleString()
+                ? +calculatedData.servicePension + +calculatedData.netSalary
                 : 0
             } SEK </span></p>
           </li>
   `
       : `<li style="color: #175945;">
             <p style="font-weight: bold;">Lön på ditt konto</p>
-            <p><span>${calculatedData.netSalary.toLocaleString()} SEK</span></p>
+            <p><span>${calculatedData.netSalary} SEK</span></p>
           </li>`;
 
   resultDiv.innerHTML = text;
@@ -181,22 +177,22 @@ function calculateSalaryDetails() {
   const legendData = [
     {
       label: "Din nettolön",
-      value: parseInt(result.netSalary).toLocaleString(),
+      value: parseInt(result.netSalary),
       color: legendColors[0],
     },
     {
       label: "Tjänstepension",
-      value: parseInt(result.servicePension).toLocaleString(),
+      value: parseInt(result.servicePension),
       color: legendColors[1],
     },
     {
       label: "Skatter & avgifter",
-      value: parseInt(result.taxesAndFees).toLocaleString(),
+      value: parseInt(result.taxesAndFees),
       color: legendColors[2],
     },
     {
       label: "Bolagsbolaget avgift 6%",
-      value: parseInt(result.coolCompanyFee).toLocaleString(),
+      value: parseInt(result.coolCompanyFee),
       color: legendColors[3],
     },
   ];
