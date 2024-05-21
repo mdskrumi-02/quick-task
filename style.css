@@ -1,4 +1,4 @@
-.main_container {
+.calc_main_container {
   padding: auto;
   margin: auto;
   font-family: "Barlow", sans-serif;
@@ -6,12 +6,12 @@
   color: #475467;
 }
 
-.page_header {
+.calc_page_header {
   text-align: center;
   font-weight: 600;
 }
 
-.main_container label {
+.calc_main_container label {
   color: #ffffff;
 }
 
