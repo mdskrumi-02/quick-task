@@ -1,2 +1,1 @@
-# quick-task
-# quick-task
+# Calculator
