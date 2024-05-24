@@ -1,8 +1,8 @@
-const invoiceInput = document.getElementById("invoice");
-const selectElement = document.querySelector(".custom-select");
-const resultDiv = document.getElementById("result");
-const legendContainer = document.querySelector(".legend_section");
-const ctx = document.getElementById("myChart").getContext("2d");
+const invoiceInput = document.getElementById("invoice_sv_se");
+const selectElement = document.querySelector(".custom-select_sv_se");
+const resultDiv = document.getElementById("result_sv_se");
+const legendContainer = document.querySelector(".legend_section_sv_se");
+const ctx = document.getElementById("myChart_sv_se").getContext("2d");
 ctx.canvas.parentNode.style.width = "400px";
 ctx.canvas.parentNode.style.height = "400px";
 
@@ -84,18 +84,18 @@ function drawLegends(legend) {
     }
 
     const legendItem = document.createElement("div");
-    legendItem.classList.add("legend_row");
+    legendItem.classList.add("legend_row_sv_se");
 
     const legendColor = document.createElement("div");
-    legendColor.classList.add("legend_color");
+    legendColor.classList.add("legend_color_sv_se");
     legendColor.style.backgroundColor = item.color;
 
     const legendLeft = document.createElement("div");
-    legendLeft.classList.add("legend_left");
+    legendLeft.classList.add("legend_left_sv_se");
     legendLeft.textContent = item.label;
 
     const legendRight = document.createElement("div");
-    legendRight.classList.add("legend_right");
+    legendRight.classList.add("legend_right_sv_se");
     legendRight.textContent = item.value + " SEK";
 
     legendItem.appendChild(legendColor);
@@ -138,7 +138,7 @@ function showSummery(calculatedData) {
 function calculateSalaryDetails() {
   let result = {};
 
-  if (!invoice || !age) {
+  if (!invoiceAmount || !age) {
     return null;
   } else if (age === "1") {
     // Calculation for age less than 25
@@ -204,7 +204,7 @@ invoiceInput.oninput = debounce(handleInvoiceChange, 300);
 handleInvoiceChange();
 
 selectElement.addEventListener("click", function () {
-  y = document.getElementsByClassName("select-selected");
+  y = document.getElementsByClassName("select-selected_sv_se");
 
   if (y[0].innerText === "< 24 år") {
     age = "1";
