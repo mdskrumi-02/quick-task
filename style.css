@@ -124,7 +124,8 @@
 
 .legend_row_sv_se {
   display: flex;
-  min-width: 440px;
+  width: 25vw;
+  min-width: 120px;
   justify-content: space-between;
   align-items: start;
   padding-top: 1rem;
